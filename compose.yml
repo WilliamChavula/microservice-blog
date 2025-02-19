@@ -1,0 +1,33 @@
+services:
+  microservice-db:
+    image: postgres:17-alpine3.20
+    container_name: api-db
+    restart: always
+    shm_size: 128mb
+    ports:
+      - "5678:5432"
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - ./volumes/postgres-db:/var/lib/postgresql/data
+      - ./scripts:/docker-entrypoint-initdb.d
+
+  auth-api-img:
+    container_name: auth-api-container
+    restart: always
+    env_file: ./auth-api/.env
+    depends_on:
+      - microservice-db
+    build:
+      context: ./auth-api
+      dockerfile: Dockerfile
+    ports:
+      - "7500:7500"
+    volumes:
+      - ./auth-api:/api/auth-api
+      - /api/auth-api/node_modules #  container manages its own node_modules. Fix esbuild architecture mismatch between container & host.
+    command: pnpm dev
+
+
