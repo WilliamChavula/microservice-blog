@@ -30,4 +30,18 @@ services:
       - /api/auth-api/node_modules #  container manages its own node_modules. Fix esbuild architecture mismatch between container & host.
     command: pnpm dev
 
-
+  posts-api-img:
+    container_name: posts-api-container
+    restart: always
+    env_file: ./posts-api/.env
+    depends_on:
+      - microservice-db
+    build:
+      context: ./posts-api
+      dockerfile: Dockerfile
+    ports:
+      - "7600:7600"
+    volumes:
+      - ./posts-api:/api/posts-api
+      - /api/posts-api/node_modules
+    command: pnpm dev
