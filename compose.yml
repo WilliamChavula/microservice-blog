@@ -44,4 +44,4 @@ services:
     volumes:
       - ./posts-api:/api/posts-api
       - /api/posts-api/node_modules
-    command: pnpm dev
+    command: pnpm dev:tsx
