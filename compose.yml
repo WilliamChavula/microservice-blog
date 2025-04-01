@@ -45,3 +45,17 @@ services:
       - ./posts-api:/api/posts-api
       - /api/posts-api/node_modules
     command: pnpm dev:tsx
+
+  authorization-api-img:
+    container_name: authorization-api-container
+    restart: always
+    env_file: ./authorization-api/.env
+    build:
+      context: ./authorization-api
+      dockerfile: Dockerfile
+    ports:
+      - "7700:7700"
+    volumes:
+      - ./authorization-api:/api/authorization-api
+      - /api/authorization-api/node_modules
+    command: pnpm dev
