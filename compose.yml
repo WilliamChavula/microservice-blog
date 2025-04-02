@@ -33,7 +33,9 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper-container:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
 
@@ -59,6 +61,7 @@ services:
     env_file: ./posts-api/.env
     depends_on:
       - microservice-db
+      - kafka
     build:
       context: ./posts-api
       dockerfile: Dockerfile
@@ -81,4 +84,20 @@ services:
     volumes:
       - ./authorization-api:/api/authorization-api
       - /api/authorization-api/node_modules
+    command: pnpm dev
+
+  audit-api-img:
+    container_name: audit-api-container
+    restart: always
+    env_file: ./audit-api/.env
+    depends_on:
+      - kafka
+    build:
+      context: ./audit-api
+      dockerfile: Dockerfile
+    ports:
+      - "7800:7800"
+    volumes:
+      - ./audit-api:/api/audit-api
+      - /api/audit-api/node_modules
     command: pnpm dev
