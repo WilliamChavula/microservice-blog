@@ -33,3 +33,11 @@ test-auth:
 test-posts:
 	cd posts-api && \
 	docker compose exec posts-api-img pnpm test
+
+gen-audit-client:
+	cd audit-api && \
+	pnpm dlx prisma generate
+
+gen-perm-client:
+	cd authorization-api && \
+	pnpm dlx prisma generate
