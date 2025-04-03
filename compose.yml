@@ -101,3 +101,16 @@ services:
       - ./audit-api:/api/audit-api
       - /api/audit-api/node_modules
     command: pnpm dev
+
+  api-gateway-img:
+    container_name: api-gateway-container
+    restart: always
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./api-gateway:/api/api-gateway
+      - /api/api-gateway/node_modules
+    command: pnpm dev
