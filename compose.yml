@@ -3,7 +3,7 @@ services:
     image: postgres:17-alpine3.20
     container_name: api-db
     networks:
-      - microservice-net
+      - microservice-internal
     restart: always
     shm_size: 128mb
     ports:
@@ -20,7 +20,7 @@ services:
     image: confluentinc/cp-zookeeper:latest
     container_name: zookeeper-container
     networks:
-      - microservice-net
+      - microservice-internal
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -31,7 +31,7 @@ services:
     image: confluentinc/cp-kafka:latest
     container_name: kafka-container
     networks:
-      - microservice-net
+      - microservice-internal
     depends_on:
       - zookeeper
     ports:
@@ -48,7 +48,7 @@ services:
   auth-api-img:
     container_name: auth-api-container
     networks:
-      - microservice-net
+      - microservice-internal
     restart: always
     env_file: ./auth-api/.env
     depends_on:
@@ -64,7 +64,8 @@ services:
   posts-api-img:
     container_name: posts-api-container
     networks:
-      - microservice-net
+      - microservice-internal
+      - microservice-external
     restart: always
     env_file: ./posts-api/.env
     depends_on:
@@ -81,7 +82,7 @@ services:
   authorization-api-img:
     container_name: authorization-api-container
     networks:
-      - microservice-net
+      - microservice-internal
     restart: always
     env_file: ./authorization-api/.env
     build:
@@ -95,7 +96,7 @@ services:
   audit-api-img:
     container_name: audit-api-container
     networks:
-      - microservice-net
+      - microservice-internal
     restart: always
     env_file: ./audit-api/.env
     depends_on:
@@ -111,7 +112,7 @@ services:
   api-gateway-img:
     container_name: api-gateway-container
     networks:
-      - microservice-net
+      - microservice-internal
     restart: always
     build:
       context: ./api-gateway
@@ -124,5 +125,6 @@ services:
     command: pnpm dev
 
 networks:
-  microservice-net:
+  microservice-external:
     external: true
+  microservice-internal:
