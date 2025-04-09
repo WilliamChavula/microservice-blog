@@ -4,6 +4,7 @@ services:
     container_name: api-db
     networks:
       - microservice-internal
+      - microservice-external
     restart: always
     shm_size: 128mb
     ports:
