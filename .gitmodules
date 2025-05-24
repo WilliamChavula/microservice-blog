@@ -1,0 +1,3 @@
+[submodule "audit-api"]
+	path = audit-api
+	url = https://github.com/WilliamChavula/microservice-blog-audit-api.git
