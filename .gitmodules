@@ -7,3 +7,6 @@
 [submodule "authorization-api"]
 	path = authorization-api
 	url = https://github.com/WilliamChavula/microservice-blog-authorization-api.git
+[submodule "posts-api"]
+	path = posts-api
+	url = https://github.com/WilliamChavula/microservice-blog-posts-api.git
