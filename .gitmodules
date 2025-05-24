@@ -4,3 +4,6 @@
 [submodule "auth-api"]
 	path = auth-api
 	url = https://github.com/WilliamChavula/microservice-blog-auth-api.git
+[submodule "authorization-api"]
+	path = authorization-api
+	url = https://github.com/WilliamChavula/microservice-blog-authorization-api.git
