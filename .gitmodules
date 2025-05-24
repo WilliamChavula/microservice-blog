@@ -19,3 +19,6 @@
 [submodule "notification_service_mq"]
 	path = notification_service_mq
 	url = https://github.com/WilliamChavula/microservice-blog-notification-api.git
+[submodule "api-gateway"]
+	path = api-gateway
+	url = https://github.com/WilliamChavula/microservice-blog-api-gateway.git
