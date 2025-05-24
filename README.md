@@ -9,7 +9,7 @@ For this project, I adopted a microservice architecture. The application was com
 ---
 
 ## Features
-All the services, with the exception of the notification service, were implemented using `TypeScript` and the `Fastify` framework, which is built on `Node.js`. The notification service, to demonstrate versatility, was developed using `Python`.
+All the services, with the exception of the notification service, were implemented using `TypeScript` and the `Fastify` framework, which is built on `Node.js`. The notification service, to demonstrate versatility, was developed using `Python`. User profile images are processed and stored in `Cloudinary`. Post images are stored in `AppWrite`.
 
 ---
 
@@ -31,3 +31,5 @@ For data storage, posts, comments, and user data were stored in a `PostgreSQL` r
 - [Python](https://www.python.org/doc/)
 - [Mongodb](https://www.mongodb.com/docs/guides/crud/install/)
 - [Node.js](https://nodejs.org/docs/latest/api/)
+- [Cloudinary](https://cloudinary.com/documentation)
+- [AppWrite](https://appwrite.io/docs)
