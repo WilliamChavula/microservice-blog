@@ -10,3 +10,6 @@
 [submodule "posts-api"]
 	path = posts-api
 	url = https://github.com/WilliamChavula/microservice-blog-posts-api.git
+[submodule "search_api"]
+	path = search_api
+	url = https://github.com/WilliamChavula/microservice-blog-search-api.git
